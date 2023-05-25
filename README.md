@@ -1,3 +1,15 @@
+
+
+Serverless Functions
+In this app, serverless functions will be used for authentication and to retrieve tokens so that requests can be made to the Google Calendar API. 
+
+
+
+
+
+
+
+
 User Stories & Scenarios
 
 Feature 2: Show/Hide An Event’s Details
