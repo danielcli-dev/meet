@@ -68,4 +68,36 @@ describe("<App /> integration", () => {
     expect(AppWrapper.state("events")).toEqual(allEvents);
     AppWrapper.unmount();
   });
+
+  test("App events state loaded from mock API", async () => {
+    const AppWrapper = mount(<App />);
+
+    await getEvents();
+
+    expect(AppWrapper.state("events")).toEqual(mockData);
+    AppWrapper.unmount();
+  });
+
+  // test("events state changes number of events changes", async () => {
+  //   const AppWrapper = mount(<App />);
+  //   const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+  //   // const number = NumberOfEventsWrapper.state("query");
+  //   const event = { target: { value: 3 } };
+  //   await NumberOfEventsWrapper.instance().handleInputChanged(event);
+
+  //   expect(AppWrapper.state("events").length).toEqual(3);
+  //   AppWrapper.unmount();
+  // });
+
+  test("get list of events matching the number of events selected by the user", async () => {
+    const AppWrapper = mount(<App />);
+    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+    const numberInput = Math.floor(Math.random() * 2);
+    const event = { target: { value: numberInput } };
+    await NumberOfEventsWrapper.instance().handleInputChanged(event);
+    expect(AppWrapper.state("numberOfEvents")).toEqual(numberInput);
+    await AppWrapper.instance().updateEvents("all");
+    expect(AppWrapper.state("events").length).toBe(numberInput);
+    AppWrapper.unmount();
+  });
 });
