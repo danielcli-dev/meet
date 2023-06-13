@@ -33,7 +33,7 @@ class App extends Component {
           ? events
           : events.filter((event) => event.location === location);
 
-      if (eventCount) {
+      if (eventCount >= 0) {
         this.setState({
           events: locationEvents.slice(0, eventCount),
           numberOfEvents: eventCount,
