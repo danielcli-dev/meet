@@ -10,6 +10,7 @@ class App extends Component {
     events: [],
     locations: [],
     numberOfEvents: 32,
+    currentLocation: null,
   };
 
   componentDidMount() {
@@ -28,10 +29,16 @@ class App extends Component {
 
   updateEvents = (location, eventCount) => {
     getEvents().then((events) => {
+      if (location) {
+        this.setState({ currentLocation: location });
+      }
+
       const locationEvents =
-        location === "all"
+        this.state.currentLocation === "all" || null
           ? events
-          : events.filter((event) => event.location === location);
+          : events.filter(
+              (event) => event.location === this.state.currentLocation
+            );
 
       if (eventCount >= 0) {
         this.setState({
