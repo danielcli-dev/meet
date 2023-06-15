@@ -10,7 +10,7 @@ class App extends Component {
     events: [],
     locations: [],
     numberOfEvents: 32,
-    currentLocation: null,
+    currentLocation: "all",
   };
 
   componentDidMount() {

@@ -12,7 +12,7 @@ class Event extends Component {
     const { event } = this.props;
     const { detailsOpen } = this.state;
     return (
-      <div className="Event">
+      <div className="event">
         <h4 className="event__summary">{event.summary}</h4>
 
         <div className="event__body">
