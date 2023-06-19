@@ -5,12 +5,15 @@ import CitySearch from "./CitySearch";
 import NumberOfEvents from "./NumberOfEvents";
 import { extractLocations, getEvents } from "./api";
 import "./nprogress.css";
+import { ErrorAlert } from "./Alert";
+
 class App extends Component {
   state = {
     events: [],
     locations: [],
     numberOfEvents: 32,
     currentLocation: "all",
+    infoText: "",
   };
 
   componentDidMount() {
@@ -51,6 +54,12 @@ class App extends Component {
         });
       }
     });
+
+    if (!navigator.onLine) {
+      this.setState({ infoText: "wow" });
+    } else {
+      this.setState({ infoText: "" });
+    }
   };
 
   render() {
@@ -64,6 +73,8 @@ class App extends Component {
           // numberOfEvents={this.state.numberOfEvents}
           updateEvents={this.updateEvents}
         />
+        <ErrorAlert text={this.state.infoText} />
+
         <EventList events={this.state.events} />
       </div>
     );
