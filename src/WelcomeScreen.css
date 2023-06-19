@@ -1,3 +1,8 @@
+button,
+a {
+  margin: 20px;
+}
+
 .WelcomeScreen {
   position: fixed;
   width: 100%;
