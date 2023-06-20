@@ -75,7 +75,10 @@ class App extends Component {
     });
 
     if (!navigator.onLine) {
-      this.setState({ infoText: "wow" });
+      this.setState({
+        infoText:
+          "You are not connected to the internet. The events shown below may not be accurate",
+      });
     } else {
       this.setState({ infoText: "" });
     }
@@ -113,7 +116,7 @@ class App extends Component {
         <h4>Events in each city</h4>
         <ErrorAlert text={this.state.infoText} />
         <div className="data-vis-wrapper">
-          <EventGenre events={events} />
+          <EventGenre events={this.state.events} />
           <ResponsiveContainer height={400}>
             <ScatterChart
               margin={{
