@@ -24,7 +24,7 @@ class App extends Component {
     numberOfEvents: 32,
     currentLocation: "all",
     infoText: "",
-    showWelcomeScreen: undefined,
+    showWelcomeScreen: true,
   };
 
   async componentDidMount() {
@@ -79,6 +79,7 @@ class App extends Component {
       this.setState({ infoText: "" });
     }
   };
+
   getData = () => {
     const { locations, events } = this.state;
     const data = locations.map((location) => {
@@ -90,11 +91,13 @@ class App extends Component {
     });
     return data;
   };
+
   render() {
     // const { locations, numberOfEvents } = this.state;
 
     if (this.state.showWelcomeScreen === undefined)
       return <div className="App" />;
+
     return (
       <div className="App">
         <h1>Meet App</h1>
@@ -103,7 +106,7 @@ class App extends Component {
           updateEvents={this.updateEvents}
         />
         <NumberOfEvents
-          // numberOfEvents={this.state.numberOfEvents}
+          numberOfEvents={this.state.numberOfEvents}
           updateEvents={this.updateEvents}
         />{" "}
         <h4>Events in each city</h4>
@@ -120,7 +123,12 @@ class App extends Component {
         >
           <CartesianGrid />
           <XAxis dataKey="city" type="category" name="city" />
-          <YAxis dataKey="number" type="number" name="number of events" />
+          <YAxis
+            dataKey="number"
+            type="number"
+            name="number of events"
+            allowDecimals={false}
+          />
 
           <Tooltip cursor={{ strokeDasharray: "3 3" }} />
           <Scatter data={this.getData()} fill="#8884d8" />
